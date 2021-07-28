@@ -1,30 +1,23 @@
-# Deque Workshop
+# Accessibility Workshop
 
 ## Prerequisites
 
-- [`node.js`](https://nodejs.org/en/) version 14 or greater.
-- [`yarn`](https://yarnpkg.com/) package
-
-### Be sure to install:
-
-- node version 14+
-- yarn
+- [Node Version Manager](https://github.com/nvm-sh/nvm)
+- [Yarn](https://yarnpkg.com/)
+- [axe Devtools Extension](https://www.deque.com/axe/browser-extensions/)
 
 ## Setup
 
 ### Install dependencies
 
 ```sh
+nvm use
 yarn
 ```
 
-## Workshop!
-
-**NOTE**: this particular app is built with react, an understanding of react will be helpful but is not required. We will walk you through everything!
+## Workshop
 
 Go ahead and run your local dev server (`yarn start`). Feel free to play around with the app and get familiar with it.
-
-### [install "axe Accessibility Linter" if using VSCode!](https://marketplace.visualstudio.com/items?itemName=deque-systems.vscode-axe-linter)
 
 ### Component structure
 
@@ -36,69 +29,47 @@ Go ahead and run your local dev server (`yarn start`). Feel free to play around 
 
 ### Unit tests
 
-_review existing unit tests / assertions_
+The unit tests are written with [Jest](jestjs.io/) and [Enzyme](https://enzymejs.github.io/enzyme/).
 
 ```sh
-yarn test --watch # you may have to type "a" into the console to get *all* tests to run!
+yarn test
 ```
 
-Fix the failing tests!
-
-Test the live region out with a screen reader!
+Some of them will fail. Work with your partner to identify the problems, and fix the components so the tests pass.
 
 ### axe DevTools
 
-Let's run axe on our app now that we've got passing unit tests.
+Once the unit tests are passing, open the app in your browser at `http://localhost:1235`, and open up your devtools. You should see a tab for the axe DevTools extension- switch to that tab, and run a scan of the page.
 
-1. install the [axe extension](https://chrome.google.com/webstore/detail/axe-devtools-web-accessib/lhdoppojpmngadmnindnejefpokejbdd?hl=en-US)
+You'll see a number of 'serious' and 'critical' issues flagged up, which you can look through using the arrow buttons in the top right. Most will have a clear explanation of how to fix the problem- work through these with your pair. A few will be flagged up as needing review, due to the limitations of the automated tooling- in the context of this workshop, these issues can be safely ignored.
 
-- sign up for devtools too! https://www.deque.com/axe/devtools/
+### Manual testing
 
-1. navigate browser to `http://localhost:1235`
-1. open up axe devtools
-1. scan the page
-1. save results!
+Automated testing can do a lot to help flag up accessibility issues, but manual testing with assistive technologies is the best way to find problems with the way a page actually feels to use. Make sure you check through all the features of the app, including the recipe edit form.
 
-- _if you happened to have opened up the devtools console earlier, you probably saw a few of these violations printed out in the console via [`@axe-core/react`](https://www.npmjs.com/package/@axe-core/react)_
+#### Initial sense check
 
-1. review serious and critical issues
-1. fix all of those issues
-1. run the scan again until you have 0 violations (you can ignore the needs review color contrast issues -- no real issues there)
+In looking at the page and through the code so far, have you already noticed any issues? For example, does the page title look right to you? Talk to your pair about anything you've already spotted, and how you can fix it.
 
-#### Enter IGT
+#### Keyboard navigation
 
-> Intelligent what!?!
+Try navigating around the app just using your keyboard.
 
-axe Devtools Pro's Intelligent Guided Tests will guide you through testing that can't be fully automated and needs a human to answer simple questions in order to raise accessiblity violations that axe can't find on its own. Don't worry, these questions will be very easy to answer and require 0 accessiblity testing expertise.
+- Can you always easily keep track of which element has keyboard focus?
+- Is there anything you can interact with using your mouse, but not with your keyboard?
 
-##### Page Info IGT
+It may help to use the Inspect tab in your devtools to take a look at the markup and focus styling of particular elements. Once you've identified the problem, try writing a unit test to cover it!
 
-Run the very simple Page Info IGT to get acclimated with Intelligent Guided Testing
+#### Using a screen reader
 
-- fix the title issue by adding a descriptive document title
-- run Page Info IGT again and verify that no remaining Page Info issues exist (#axeCleanPageInfoIGT)
+You may find this easiest to do in Safari. Start VoiceOver, and try navigating around the page just like you did with the keyboard. Focus on what you're hearing, and not what you can already see. Are you getting all the same information as you would using the page visually?
 
-##### Keyboard IGT
+Some areas to focus on:
 
-Run the keyboard IGT and observe what it finds.
+- Images may not all need alt text, but the alt text should be meaningful and unique.
+- Interactive elements should be announced, with a prompt from the screen reader about how to use them.
 
-- fix the focus indication issues
-    <details><summary>hint</summary> see `components/Recipes/index.css` (`.Recipes__card-edit:focus` style declaration)</details>
-- fix the fact that the recipe card's edit button is not marked up as a real button :facepalm:
-  - write a new unit test for this!
-- run the keyboard IGT again to verify that the issues have been resolved! (#axeCleanKeyboardIGT)
-
-##### Images IGT
-
-Run the images IGT and observe what it finds.
-
-- fix the stats images by marking them up as presentational
-    <details><summary>hint</summary> adding `alt=""` is sufficient (but you _can_ go above and beyond and also set `role=presentation`)</details>
-    - write a unit test for this!
-- make the pencil icons "Edit" image's alt text descriptive / unique by following the wireframe's requirement and appending the recipe name to the alt text
-  - write a unit test for this!
-
-##### Forms IGT
+<!-- ##### Forms IGT
 
 Click on "COOK CHOCOLATE CAKE" button to launch the modal. In devtools, click "Start testing forms".
 
@@ -106,34 +77,4 @@ Click on "COOK CHOCOLATE CAKE" button to launch the modal. In devtools, click "S
   - bonus: add some visual indication that the field is required!
 - make the error messages more descriptive
   - write a unit test for this!
-- run the IGT again to verify that no remaining Forms issues exist (#axeCleanFormsIGT)
-
-##### Keep it going
-
-If you have time, run through the other IGTs and see if you can find any other issues
-
-#### Sustainability
-
-We wrote unit tests as we found issues...This prevents us from making the same mistake in the future and ensures these issues do not creep back into the source code.
-
-<details>
-  <summary>Example: test that the stats images are all properly marked as decorative/presentational</summary>
-
-```js
-// components/Stats/index.test.js
-test('marks each icon as decorative', () => {
-  const stats = shallow(<Stats stats={statsStub} />);
-
-  stats.find('.Stat__value img').forEach(icon => {
-    expect(icon.is('[alt=""]')).toBeTruthy();
-  });
-});
-```
-
-</details>
-
-## Try these techniques on your own content!
-
-- get axe running in your unit tests
-- write a11y-specific unit tests
-- run IGTs on your page(s)
+- run the IGT again to verify that no remaining Forms issues exist (#axeCleanFormsIGT) -->
