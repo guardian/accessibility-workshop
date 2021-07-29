@@ -45,7 +45,7 @@ You'll see a number of 'serious' and 'critical' issues flagged up, which you can
 
 ### Manual testing
 
-Automated testing can do a lot to help flag up accessibility issues, but manual testing with assistive technologies is the best way to find problems with the way a page actually feels to use. Make sure you check through all the features of the app, including the recipe edit form.
+Automated testing can do a lot to help flag up accessibility issues, but manual testing with assistive technologies is the best way to find problems with the way a page actually feels to use. Make sure you check through all the features of the app, including the recipe edit form. When you've identified a problem, try writing a unit test to cover it!
 
 #### Initial sense check
 
@@ -58,7 +58,7 @@ Try navigating around the app just using your keyboard.
 - Can you always easily keep track of which element has keyboard focus?
 - Is there anything you can interact with using your mouse, but not with your keyboard?
 
-It may help to use the Inspect tab in your devtools to take a look at the markup and focus styling of particular elements. Once you've identified the problem, try writing a unit test to cover it!
+It may help to use the Inspect tab in your devtools to take a look at the markup and focus styling of particular elements.
 
 #### Using a screen reader
 
@@ -66,15 +66,6 @@ You may find this easiest to do in Safari. Start VoiceOver, and try navigating a
 
 Some areas to focus on:
 
-- Images may not all need alt text, but the alt text should be meaningful and unique.
+- Images may not all need alt text if they are described by the surrounding text, but any alt text should be meaningful and unique.
 - Interactive elements should be announced, with a prompt from the screen reader about how to use them.
-
-<!-- ##### Forms IGT
-
-Click on "COOK CHOCOLATE CAKE" button to launch the modal. In devtools, click "Start testing forms".
-
-- fix the `aria-required` issue
-  - bonus: add some visual indication that the field is required!
-- make the error messages more descriptive
-  - write a unit test for this!
-- run the IGT again to verify that no remaining Forms issues exist (#axeCleanFormsIGT) -->
+- Inputs should have clear labels, and any error messages should be descriptive and easy to understand.
