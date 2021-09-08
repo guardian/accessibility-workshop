@@ -8,6 +8,10 @@ html {
   box-sizing: inherit;
 }
 
+body {
+  min-height: 100vh;
+}
+
 h1 {
   font-size: 26px;
   color: #333;
@@ -39,4 +43,8 @@ body .dqpl-top-bar [role='menubar'] > li:first-child {
 body .dqpl-layout,
 body .dqpl-layout .dqpl-main-content {
   padding: 0;
+}
+
+#app {
+  min-height: 100vh;
 }
