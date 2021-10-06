@@ -56,7 +56,7 @@ It may help to use the Inspect tab in your devtools to take a look at the markup
 
 #### Using a screen reader
 
-You may find this easiest to do in Safari. Start VoiceOver, and try navigating around the page just like you did with the keyboard. Focus on what you're hearing, and not what you can already see. Are you getting all the same information as you would using the page visually?
+You may find this easiest to do in Safari. Start VoiceOverm, either by pressing command + F5 or by holding the command key and pressing (not touching!) the Touch ID button three times, and try navigating around the page just like you did with the keyboard. Focus on what you're hearing, and not what you can already see. Are you getting all the same information as you would using the page visually?
 
 Some areas to focus on:
 
