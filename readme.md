@@ -11,9 +11,10 @@
 - [Funkify Extension for Chrome](https://www.funkify.org/)
 - [Color Blindness Empathy Test for Firefox](https://addons.mozilla.org/en-GB/firefox/addon/a11y-color-blindness-test/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search)
 - [Sim Daltonism (Mac app, alternative to the extensions)](https://michelf.ca/projects/mac/sim-daltonism/)
-- MacOS Enhanced Dictation
+- MacOS Enhanced Dictation/Voice Control
   - Go to System Preferences > Keyboard > Dictation, turn Dictation on and select Use Enhanced Dictation
   - Go to System Preferences > Accessibility > Dictation > Dictation Commands and select Enable advanced commands
+  - If you're on macOS Catalina, [use this guide instead](https://support.apple.com/en-gb/guide/mac-help/mh40719/mac)
 
 ## Setup
 
@@ -81,9 +82,9 @@ Try navigating through the app using the switch- the pointer options are useful 
 
 #### Voice navigation
 
-NB: If you're using macOS Catalina there is a much more powerful built-in voice control system. [See this article for a guide on using it](https://support.apple.com/en-gb/guide/mac-help/mh40719/mac). The instructions below are aimed at Mojave users.
+If you're using macOS Catalina, use the guide linked above on setting up and using Voice Control. If you're using macOS Mojave, make sure you've set up Enhanced Dictation as outlined above. Turn on Dictation- the default shortcut is hitting the fn key twice- and say 'Show commands' to get a helpful list of available commands.
 
-Make sure you've set up Enhanced Dictation as outlined above. Turn on Dictation- the default shortcut is hitting fn twice- and say 'Show commands' to get a helpful list of available commands. Try navigating around the page. 'Go to next field' should act like the tab key, and with advanced commands enabled you should be able to give commands like 'Click [button text]' to select a button or other interactive element.
+Try navigating around the page. 'Go to next field' should act like the tab key, and with advanced commands enabled you should be able to give commands like 'Click [button text]' to select a button or other interactive element.
 
 Try navigating around, and maybe editing some of the recipes using voice controls
 
